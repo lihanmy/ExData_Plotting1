@@ -12,31 +12,18 @@ sel_df$datetime <- strptime(paste(sel_df$Date,sel_df$Time),"%Y-%m-%d %H:%M:%S")
 par(mfcol = c(2,2))
 par(mar = c(4,4,2,1))
 with(sel_df, {
-    plot(newtime,Global_active_power,type = "n",
-         ylab="Global active power")
-    lines(newtime,Global_active_power)
-})
-
-with(sel_df, {
-    plot(newtime,Sub_metering_1,type = "n",
-         ylab="Energy sub metering")
-    lines(newtime,Sub_metering_1,col="black")
-    lines(newtime,Sub_metering_2,col="red")
-    lines(newtime,Sub_metering_3,col="blue")
+    plot(datetime,Global_active_power,type = "l",
+         ylab="Global active power",xlab="")
+    plot(datetime,Sub_metering_1,type = "l",
+         ylab="Energy sub metering",col="black",xlab="")
+    lines(datetime,Sub_metering_2,col="red")
+    lines(datetime,Sub_metering_3,col="blue")
     legend("topright",lty=1,col=c("black","red","blue"),cex = 0.5,
            legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
-})
-
-with(sel_df, {
-    plot(newtime,Voltage,type = "n",
-         ylab="Votage")
-    lines(newtime,Voltage)
-})
-
-with(sel_df, {
-    plot(newtime,Global_reactive_power,type = "n",
-         ylab="Global reactive power")
-    lines(newtime,Global_reactive_power)
+    plot(datetime,Voltage,type = "l",
+         ylab="Votage",xlab="datetime")
+    plot(datetime,Global_reactive_power,type = "l",
+         ylab="Global reactive power",xlab="datetime")
 })
 dev.copy(png,"plot4.png")
 dev.off()
